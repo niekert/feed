@@ -23,6 +23,5 @@ instafeedApp.config(['$routeProvider', '$locationProvider',
     }]);
 
 instafeedApp.constant("appSettings", {
-    "clientID": "7d5c7187bf1948b1b949cdb47143169a",
-    "clientSecret": "430f9e714e7044268f33125f20b0e7b1"
+    "clientID": "7d5c7187bf1948b1b949cdb47143169a" //DONT LOOK
 });
