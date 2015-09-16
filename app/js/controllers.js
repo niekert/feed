@@ -11,9 +11,10 @@ instafeedControllers.controller('FeedContainerCtrl', ['$scope', 'Instagram',
         $scope.tagQuery = "";
         $scope.images = [];
 
-        $scope.keyPressed = function ($event) {
-            console.log($event.keyCode);
+        var spacePressed = false;
 
+        $scope.keyPressed = function ($event) {
+            spacePressed = false;
             switch($event.keyCode){
                 case 13: //Enter key
                     $scope.tagQuery = $scope.tagText;
@@ -21,7 +22,16 @@ instafeedControllers.controller('FeedContainerCtrl', ['$scope', 'Instagram',
                     break;
                 case 32: //space
                     $event.stopImmediatePropagation();
+                    $event.preventDefault();
+                    spacePressed = true; //very ugly workaround
                     break;
+            }
+        };
+
+        $scope.tagChanged = function(){
+            if(spacePressed)
+            {
+                $scope.tagText = $scope.tagText.substr(0, $scope.tagText.length -1);
             }
         };
 

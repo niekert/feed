@@ -3,6 +3,7 @@
 		<div class="searchBar">
 			<input type="text" class="" id="txtSearch" placeholder="Search for tags" autofocus
 				   ng-model="tagText"
+				   ng-change="tagChanged()"
 				   ng-pattern="/^\s*\w*\s*$/"
 				   ng-keydown="keyPressed($event)"/>
 		</div>
