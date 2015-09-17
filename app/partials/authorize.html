@@ -1,0 +1,45 @@
+<div layout="row" layout-align="center center">
+
+	<div ng-if="!state.user" class="center-box center-box-sm">
+		<div ng-if="!isValid">
+			<p>
+				Sorry, but the auth code you provided was invalid.
+			</p>
+		</div>
+
+		<div ng-if="!state.user" layout="column" layout-align="center center">
+			<h3>Getting your account details.</h3>
+			<md-progress-circular layout="row" md-mode="indeterminate" md-diameter="60"></md-progress-circular>
+		</div>
+	</div>
+
+	<div class="center-box center-box-welcome animated fadeIn" ng-if="state.user">
+		<div layout="row">
+			<img layout="column" flex="35" ng-src="{{state.user.profile_picture}}">
+			<span flex="5"></span>
+
+			<div layout="column" flex="60">
+				<div layout="row">
+					<h2>Welcome, {{state.user.username}}</h2>
+				</div>
+				<div layout="row">
+					<span flex>Followers: <b>{{state.user.counts.followed_by}}</b></span>
+					<span flex>Following: <b>{{state.user.counts.follows}}</b></span>
+				</div>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div layout="row">
+			<div layout="column" flex="45">
+				<a ng-href="/">
+					<md-button style="width:100%" class="md-raised md-primary">Get started
+					</md-button>
+				</a>
+			</div>
+			<span flex="10"></span>
+			<div layout="column" flex="45">
+				<md-button class="md-raised md-primary">View profile</md-button>
+			</div>
+		</div>
+	</div>
+</div>

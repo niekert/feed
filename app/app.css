@@ -49,20 +49,23 @@ html {
 }
 
 .feedContainer {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -350px;
-    margin-top: -350px;
-    width: 700px;
-    height: 700px;
+    min-height: 400px;
+    max-height: 90%;
     background-color: #fafafa;
     border-radius: 20px;
+    margin-top:10px;
 }
 
 .feedContent {
     padding: 7px;
     overflow: auto;
+}
+
+.bottomLabel {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    color:white;
 }
 
 .searchBar {
@@ -94,7 +97,6 @@ html {
 .images {
     margin-top:10px;
     overflow:auto;
-    max-height: 600px;
 }
 
 .image {
@@ -104,6 +106,31 @@ html {
     padding:2px;
     margin: 2px;
     border:1px;
+}
+
+.center-box {
+    position:absolute;
+    top:50%;
+    left:50%;
+    background-color:#fff;
+    border-radius: 5px;
+    padding:5px;
+    text-align: center;
+}
+
+.center-box-sm {
+    width:200px;
+    height:200px;
+    margin-left: -100px;
+    margin-top: -100px;
+}
+
+.center-box-welcome {
+    width: 400px;
+    height: 200px;
+    margin-left:-200px;
+    margin-top:-100px;
+    text-align: left;
 }
 
 /*CSS loader*/

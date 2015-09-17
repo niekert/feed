@@ -1,4 +1,5 @@
-<div class="feedContainer">
+<span flex="20" layout="column"></span>
+<div flex="60" layout="column" class="feedContainer">
 	<div class="feedContent">
 		<div class="searchBar">
 			<input type="text" class="" id="txtSearch" placeholder="Search for tags" autofocus
@@ -7,24 +8,28 @@
 				   ng-pattern="/^\s*\w*\s*$/"
 				   ng-keydown="keyPressed($event)"/>
 		</div>
-		<div class="noSearch" ng-show="!tagQuery.length">
-			<h1>No tags entered</h1>
 
-			<p>
-				Please search for a tag to get results.
-			</p>
-		</div>
+		<md-content style="height:600px; margin-top:10px;">
 
-		<div class="noSearch" ng-show="isLoading" >
-			<div class="cssload-container">
-				<div class="cssload-circle-1">
-					<div class="cssload-circle-2">
-						<div class="cssload-circle-3">
-							<div class="cssload-circle-4">
-								<div class="cssload-circle-5">
-									<div class="cssload-circle-6">
-										<div class="cssload-circle-7">
-											<div class="cssload-circle-8">
+			<div class="noSearch" ng-show="tagQuery.length < 1">
+				<h1>Geen tag ingevoerd</h1>
+
+				<p>
+					Voer een tag in voor resultaten... :)
+				</p>
+			</div>
+
+			<div class="noSearch" ng-show="isLoading">
+				<div class="cssload-container">
+					<div class="cssload-circle-1">
+						<div class="cssload-circle-2">
+							<div class="cssload-circle-3">
+								<div class="cssload-circle-4">
+									<div class="cssload-circle-5">
+										<div class="cssload-circle-6">
+											<div class="cssload-circle-7">
+												<div class="cssload-circle-8">
+												</div>
 											</div>
 										</div>
 									</div>
@@ -33,16 +38,18 @@
 						</div>
 					</div>
 				</div>
+				<p>Laden... (toffe animatie wel)</p>
 			</div>
-			<p>Loading...</p>
-		</div>
 
-		<div class="images" ng-show="images.length">
-			<div class="image" ng-repeat="image in images">
-				<img ng-src="{{image.images['low_resolution'].url}}">
-				<label></label>
+
+			<div class="images" layout-align="center start" ng-show="images.length">
+				<div class="image" ng-repeat="image in images">
+					<img ng-src="{{image.images['low_resolution'].url}}">
+					<label></label>
+				</div>
 			</div>
-		</div>
+		</md-content>
 
 	</div>
 </div>
+<span flex="20" layout="column"></span>

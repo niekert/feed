@@ -1,0 +1,54 @@
+<md-toolbar ng-controller="FooterCtrl">
+	<div class="md-toolbar-tools">
+		<a href="/"><h2>{{title}}</h2></a>
+
+		<div flex ng-if="state.user">
+			<md-button class="md-icon-button">
+				<md-icon md-svg-icon="img/apps.svg">
+					<md-tooltip>View feed</md-tooltip>
+				</md-icon>
+			</md-button>
+			<md-button class="md-icon-button">
+				<md-icon md-svg-icon="img/plus-circle.svg">
+					<md-tooltip>Upload photo</md-tooltip>
+				</md-icon>
+			</md-button>
+		</div>
+		<span flex></span>
+		<md-fab-speed-dial md-open="false" md-direction="left" class="md-fling">
+			<md-fab-trigger>
+				<md-button class="md-icon-button" aria-label="Share">
+					<!--<md-tooltip>-->
+					<!--Share-->
+					<!--</md-tooltip>-->
+					<md-icon md-svg-icon="img/share_white.svg"></md-icon>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+					<md-icon md-svg-src="img/twitter-box.svg" aria-label="Twitter" style="color:#8c8c8c;"></md-icon>
+				</md-button>
+				<md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+					<md-icon md-svg-src="img/facebook-box.svg" aria-label="Facebook" style="color:#8c8c8c;"></md-icon>
+				</md-button>
+			</md-fab-actions>
+		</md-fab-speed-dial>
+
+		<md-button class="md-icon-button" aria-label="More" ng-click="showAlert($event)">
+			<!--<md-tooltip>-->
+			<!--What is this?-->
+			<!--</md-tooltip>-->
+			<md-icon md-svg-icon="img/help_white.svg" class="s24"></md-icon>
+		</md-button>
+
+		<md-button class="md-raised"
+				   ng-if="!state.isAuthenticated"
+				   ng-click="signIn()"
+				   style="color:black;">Sign in to Instagram
+		</md-button>
+
+		<md-button ng-if="state.user">{{state.user.username}}</md-button>
+
+
+	</div>
+</md-toolbar>
