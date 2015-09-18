@@ -126,11 +126,41 @@ html {
 }
 
 .center-box-welcome {
-    width: 400px;
+    width: 300px;
     height: 200px;
-    margin-left:-200px;
+    margin-left:-150px;
     margin-top:-100px;
     text-align: left;
+}
+
+.center-box-sign-in {
+    width:200px;
+    height:200px;
+    margin-left:-100px;
+    margin-top: -100px;
+    text-align: center;
+}
+
+.boxContent {
+    background-color:#fff;
+    position: relative;
+    min-height:300px;
+    max-height:500px;
+    overflow:hidden;
+    border-radius: 10px;
+    margin-top:10px;
+    padding-top:5px;
+}
+
+.noContentCenter {
+    position:absolute;
+    left:50%;
+    top:50%;
+    height:300px;
+    width:300px;
+    text-align: center;
+    margin-left: -150px;
+    margin-right: -150px;
 }
 
 /*CSS loader*/

@@ -14,11 +14,10 @@
 	</div>
 
 	<div class="center-box center-box-welcome animated fadeIn" ng-if="state.user">
-		<div layout="row">
-			<img layout="column" flex="35" ng-src="{{state.user.profile_picture}}">
-			<span flex="5"></span>
+		<md-list-item layout="row">
+			<img layout="column" class="md-avatar" ng-src="{{state.user.profile_picture}}">
 
-			<div layout="column" flex="60">
+			<div layout="column">
 				<div layout="row">
 					<h2>Welcome, {{state.user.username}}</h2>
 				</div>
@@ -27,16 +26,16 @@
 					<span flex>Following: <b>{{state.user.counts.follows}}</b></span>
 				</div>
 			</div>
-		</div>
+		</md-list-item>
 		<md-divider></md-divider>
 		<div layout="row">
 			<div layout="column" flex="45">
 				<a ng-href="/">
-					<md-button style="width:100%" class="md-raised md-primary">Get started
+					<md-button style="width:100%" class="md-raised md-primary">View feed
 					</md-button>
 				</a>
 			</div>
-			<span flex="10"></span>
+			<span flex="10" ></span>
 			<div layout="column" flex="45">
 				<md-button class="md-raised md-primary">View profile</md-button>
 			</div>

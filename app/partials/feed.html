@@ -1,0 +1,20 @@
+<div layout="row" layout-align="center center" style="margin-top:10px" layout-fill>
+	<div flex="25" flex-sm="10"></div>
+	<div  flex="50" flex-sm="80" class="boxContent animated fadeIn">
+		<md-input-container>
+			<label>Search for users</label>
+			<input ng-model="query" autofocus/>
+		</md-input-container>
+
+
+		<div class="noContentCenter">
+			<div ng-if="!users.length">
+				<h1>No users found</h1>
+				<p>
+					Press enter to search;
+				</p>
+			</div>
+		</div>
+	</div>
+	<div flex="25" flex-sm="10"></div>
+</div>

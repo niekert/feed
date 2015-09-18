@@ -1,55 +1,26 @@
 /**
  * Created by NiekKruse on 9/16/15.
+ *
+ * Controllers for this app
  */
 
 var instafeedControllers = angular.module('instafeedControllers', []);
 
-instafeedControllers.controller('FeedContainerCtrl', ['$scope', 'Instagram',
-    function ($scope, Instagram) {
-        $scope.isLoading = false;
-        $scope.tagText = "";
-        $scope.tagQuery = "";
-        $scope.images = [];
-
-        var spacePressed = false;
-
-        $scope.keyPressed = function ($event) {
-            spacePressed = false;
-            switch ($event.keyCode) {
-                case 13: //Enter key
-                    $scope.tagQuery = $scope.tagText;
-                    loadImages();
-                    break;
-                case 32: //space
-                    $event.stopImmediatePropagation();
-                    $event.preventDefault();
-                    spacePressed = true; //very ugly workaround
-                    break;
-            }
-        };
-
-        $scope.tagChanged = function () {
-            if (spacePressed) {
-                $scope.tagText = $scope.tagText.substr(0, $scope.tagText.length - 1);
-            }
-        };
-
-
-        function loadImages() {
-            $scope.isLoading = true;
-            $scope.images = [];
-
-            Instagram.tags.queryTags({"tag": encodeURIComponent($scope.tagQuery)}, function (data) {
-                $scope.isLoading = false;
-                $scope.images = data.data;
-            });
+instafeedControllers.controller('FeedContainerCtrl', ['$scope', 'Instagram', 'appSettings', '$location', 'stateService',
+    function ($scope, Instagram, appSettings, $location, stateService) {
+        if(stateService.user){
+            $location.path('/feed');
         }
+
+        $scope.signIn = function(){
+            window.location.replace("https://api.instagram.com/oauth/authorize/?client_id=" + appSettings.clientID + "&redirect_uri=" + appSettings.baseUrl + "authorize&response_type=token");
+        };
 
     }
 ]);
 
-instafeedControllers.controller('FooterCtrl', ['$scope', '$mdDialog', 'stateService', 'appSettings',
-    function ($scope, $mdDialog, stateService, appSettings) {
+instafeedControllers.controller('FooterCtrl', ['$scope', '$mdDialog', 'stateService', 'appSettings', '$location',
+    function ($scope, $mdDialog, stateService, appSettings, $location) {
 
         $scope.title = "TagsFeed";
         $scope.state = stateService;
@@ -72,6 +43,11 @@ instafeedControllers.controller('FooterCtrl', ['$scope', '$mdDialog', 'stateServ
         $scope.signIn = function () {
             window.location.replace("https://api.instagram.com/oauth/authorize/?client_id=" + appSettings.clientID + "&redirect_uri=" + appSettings.baseUrl + "authorize&response_type=token");
         };
+
+        $scope.signout = function () {
+            stateService.signout();
+            $location.path('/');
+        }
     }]);
 
 instafeedControllers.controller("AuthorizeCtrl", ['$scope', '$location', 'stateService', 'Instagram', '$timeout',
@@ -89,14 +65,52 @@ instafeedControllers.controller("AuthorizeCtrl", ['$scope', '$location', 'stateS
 
                 $timeout(function () {
                     stateService.user = result.data;
-                    $timeout(function () {
-                        $location.path("/");
-                    }, 5000); //Show a welcome for three seconds
                 }, 1000);
             });
         }
 
-        $scope.getStarted = function(){
+        $scope.getStarted = function () {
             $location.path("/");
         }
+    }]);
+
+instafeedControllers.controller('FeedCtrl', ['$scope', '$location', 'stateService', 'Instagram',
+    function ($scope, $location, stateService, Instagram) {
+        $scope.nextMaxID = null;
+        $scope.images = [];
+
+        if (!stateService.user) {
+            $location.path("/");
+        }
+
+        Instagram.feed.query({"maxID": $scope.nextMaxID}, function (data) {
+            $scope.nextMaxID = data.pagination.next_max_id;
+            $scope.images = data.data;
+        });
+    }]);
+
+instafeedControllers.controller('UserSearchCtrl', ['$scope', 'Instagram', '$location',
+    function ($scope, Instagram, $location) {
+        $scope.query = "";
+        $scope.users = [];
+
+        $scope.keyPressed = function ($event) {
+            switch ($event.keyCode) {
+                case 13: //enter key
+                    Instagram.users.query({"q": $scope.query}, function (result) {
+                        $scope.users = result.data;
+                    });
+                    break;
+            }
+        };
+
+        $scope.goToProfile = function (username) {
+            $location.path("/profile/" + username);
+        };
+
+    }]);
+
+instafeedControllers.controller('ProfileCtrl', ['$scope', 'Instagram', '$routeParams',
+    function ($scope, Instagram, $routeParams) {
+        $scope.username = $routeParams.username;
     }]);

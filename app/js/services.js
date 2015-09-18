@@ -18,6 +18,25 @@ instagramService.factory('Instagram', ['$resource', 'appSettings', 'stateService
                     withCredentials: true
                 }
             }),
+            feed: $resource(appSettings.apiBaseUrl + "users/self/feed", {
+                "callback": "JSON_CALLBACK",
+                "access_token": stateService.getAuthCode,
+                'count':20
+            }, {
+                query: {
+                    method: 'JSONP',
+                    params: {'maxID': '@maxID'}
+                }
+            }),
+            users: $resource(appSettings.apiBaseUrl + "users/search", {
+                "callback":"JSON_CALLBACK",
+                "access_token":stateService.getAuthCode
+            }, {
+                query: {
+                    method:'JSONP',
+                    params:{'q': '@q'}
+                }
+            }),
             user: $resource(appSettings.apiBaseUrl + "users/:userID", {
                 "callback": "JSON_CALLBACK",
                 'client_id': appSettings.clientID,
@@ -48,5 +67,10 @@ stateService.service("stateService", function () {
 
     this.getAuthCode = function(){
         return authCode;
+    }
+
+    this.signout = function(){
+        authCode = "";
+        this.user = null;
     }
 });

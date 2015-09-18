@@ -1,0 +1,38 @@
+<div layout="row" layout-align="center center" style="margin-top:10px" layout-fill>
+	<div flex="30" flex-sm="10"></div>
+	<div flex="50" flex-sm="90" class="boxContent animated fadeIn">
+		<md-input-container class="md-icon-float" style="padding-bottom:5px;">
+			<label>Search for users</label>
+			<md-icon md-svg-src="img/account.svg" class="name"></md-icon>
+			<input ng-model="query" ng-keydown="keyPressed($event)" autofocus/>
+		</md-input-container>
+
+		<md-list style="max-height:500px; overflow:auto;">
+			<md-subheader class="md-sticky-clone">
+				<span>Users</span>
+			</md-subheader>
+			<md-list-item ng-repeat="user in users" layout="row" ng-click="goToProfile(user.username)">
+				<img ng-src="{{user.profile_picture}}" class="md-avatar" alt="{{user.username}}"/>
+
+				<div class="md-list-item-text" layout="column">
+					<h3>{{user.username}}</h3>
+				</div>
+
+				<hr>
+				<!--<md-divider></md-divider>-->
+
+			</md-list-item>
+		</md-list>
+
+		<div class="noContentCenter">
+			<div ng-if="!users.length">
+				<h1>No users found</h1>
+
+				<p>
+					Press enter to search.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div flex="30" flex-sm="10"></div>
+</div>

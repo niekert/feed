@@ -1,21 +1,25 @@
-<md-toolbar ng-controller="FooterCtrl">
+<md-toolbar ng-controller="FooterCtrl" style="position:fixed;">
 	<div class="md-toolbar-tools">
 		<a href="/"><h2>{{title}}</h2></a>
+				<span ng-if="state.user">
+					<a ng-href="/feed">
+						<md-button class="md-icon-button">
+							<md-icon md-svg-icon="img/apps.svg">
+								<md-tooltip>View feed</md-tooltip>
+							</md-icon>
+						</md-button>
+					</a>
+				</span>
+		<a ng-href="/search">
+			<md-button class="md-icon-button">
+				<md-icon md-svg-icon="img/account-search.svg">
+					<md-tooltip>Search users</md-tooltip>
+				</md-icon>
+			</md-button>
+		</a>
 
-		<div flex ng-if="state.user">
-			<md-button class="md-icon-button">
-				<md-icon md-svg-icon="img/apps.svg">
-					<md-tooltip>View feed</md-tooltip>
-				</md-icon>
-			</md-button>
-			<md-button class="md-icon-button">
-				<md-icon md-svg-icon="img/plus-circle.svg">
-					<md-tooltip>Upload photo</md-tooltip>
-				</md-icon>
-			</md-button>
-		</div>
 		<span flex></span>
-		<md-fab-speed-dial md-open="false" md-direction="left" class="md-fling">
+		<md-fab-speed-dial hide-sm md-open="false" md-direction="left" class="md-fling">
 			<md-fab-trigger>
 				<md-button class="md-icon-button" aria-label="Share">
 					<!--<md-tooltip>-->
@@ -41,13 +45,39 @@
 			<md-icon md-svg-icon="img/help_white.svg" class="s24"></md-icon>
 		</md-button>
 
-		<md-button class="md-raised"
-				   ng-if="!state.isAuthenticated"
-				   ng-click="signIn()"
-				   style="color:black;">Sign in to Instagram
+
+		<div ng-if="!state.user">
+
+			<md-button class="md-raised"
+					   hide-sm
+					   ng-click="signIn()"
+					   style="color:black;">Sign in to Instagram
+			</md-button>
+
+			<md-button class="md-icon-button"
+					   hide-gt-sm
+					   ng-click="signIn()">
+				<md-icon md-svg-icon="img/login.svg"></md-icon>
+			</md-button>
+		</div>
+
+
+		<md-button
+				hide-sm
+				ng-if="state.user">{{state.user.username}}
 		</md-button>
 
-		<md-button ng-if="state.user">{{state.user.username}}</md-button>
+		<md-button class="md-icon-button"
+				   hide-gt-sm
+				   ng-if="state.user">
+			<md-icon md-svg-icon="img/account-circle.svg"></md-icon>
+		</md-button>
+
+		<md-button class="md-icon-button"
+				   ng-click="signout()"
+				   ng-if="state.user">
+			<md-icon md-svg-icon="img/logout.svg"></md-icon>
+		</md-button>
 
 
 	</div>

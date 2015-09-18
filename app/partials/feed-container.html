@@ -1,55 +1,14 @@
-<span flex="20" layout="column"></span>
-<div flex="60" layout="column" class="feedContainer">
-	<div class="feedContent">
-		<div class="searchBar">
-			<input type="text" class="" id="txtSearch" placeholder="Search for tags" autofocus
-				   ng-model="tagText"
-				   ng-change="tagChanged()"
-				   ng-pattern="/^\s*\w*\s*$/"
-				   ng-keydown="keyPressed($event)"/>
+<div layout="row" layout-align="center center">
+
+	<div class="center-box center-box-sign-in animated fadeIn">
+		<h1>Welcome</h1>
+
+		<p>
+			Please sign in to start using this app.
+		</p>
+		<md-divider></md-divider>
+		<div>
+			<md-button style="width:95%;" ng-click="signIn()" class="md-raised md-primary">Sign in</md-button>
 		</div>
-
-		<md-content style="height:600px; margin-top:10px;">
-
-			<div class="noSearch" ng-show="tagQuery.length < 1">
-				<h1>Geen tag ingevoerd</h1>
-
-				<p>
-					Voer een tag in voor resultaten... :)
-				</p>
-			</div>
-
-			<div class="noSearch" ng-show="isLoading">
-				<div class="cssload-container">
-					<div class="cssload-circle-1">
-						<div class="cssload-circle-2">
-							<div class="cssload-circle-3">
-								<div class="cssload-circle-4">
-									<div class="cssload-circle-5">
-										<div class="cssload-circle-6">
-											<div class="cssload-circle-7">
-												<div class="cssload-circle-8">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<p>Laden... (toffe animatie wel)</p>
-			</div>
-
-
-			<div class="images" layout-align="center start" ng-show="images.length">
-				<div class="image" ng-repeat="image in images">
-					<img ng-src="{{image.images['low_resolution'].url}}">
-					<label></label>
-				</div>
-			</div>
-		</md-content>
-
 	</div>
 </div>
-<span flex="20" layout="column"></span>
