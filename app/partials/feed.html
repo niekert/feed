@@ -1,20 +1,81 @@
 <div layout="row" layout-align="center center" style="margin-top:10px" layout-fill>
-	<div flex="25" flex-sm="10"></div>
-	<div  flex="50" flex-sm="80" class="boxContent animated fadeIn">
-		<md-input-container>
-			<label>Search for users</label>
-			<input ng-model="query" autofocus/>
-		</md-input-container>
+	<div flex="15" flex-sm="5"></div>
+	<div flex="70" flex-sm="90" id="contentContainer" layout="row" layout-align="center center">
+		<div id="imageBox" class="boxContent animated fadeIn" ng-style="style">
+			<md-content>
+				<md-card ng-repeat="image in images">
+					<img class="md-card-image" style="cursor:pointer;"
+						 ng-src="{{useLowRes && image.images['low_resolution'].url || image.images['standard_resolution'].url}}">
+					<md-card-content>
+						<md-list-item class="md-3-line" ng-click="goProfile(image.user.username)">
+							<img ng-src="{{image.user.profile_picture}}" class="md-avatar"
+								 alt="{{image.user.username}}"/>
+
+							<div class="md-list-item-text">
+								<h3>{{image.user.username}}</h3>
+
+								<p style="max-width:80%;">{{image.caption.text}}</p>
+
+							</div>
+						</md-list-item>
+						<div class="md-actions" layout="row" layout-align="end center">
+							<md-button>
+							<span>
+								<md-icon md-svg-src="img/comment.svg"></md-icon>
+								{{image.comments.count}}
+							</span>
+							</md-button>
+							<md-button>
+							<span>
+									<md-icon md-svg-src="img/heart.svg"></md-icon>
+										{{image.likes.count}}
+							</span>
+							</md-button>
+						</div>
+					</md-card-content>
+
+				</md-card>
+				<!--<div layout="column" class="feedImage" layout-align="center" ng-repeat="image in images">-->
+				<!--<img ng-src="{{useLowRes && image.images['low_resolution'].url || image.images['standard_resolution'].url}}">-->
+				<!--<md-list-item class="md-3-line" ng-click="goProfile(image.user.username)">-->
+				<!--<img ng-src="{{image.user.profile_picture}}" class="md-avatar" alt="{{image.user.username}}"/>-->
+
+				<!--<div class="md-list-item-text">-->
+				<!--<h3>{{image.user.username}}</h3>-->
+
+				<!--<p style="max-width:80%;">{{image.caption.text}}</p>-->
+				<!--<span class="md-secondary md-hue-3">-->
+				<!--<md-icon md-svg-src="img/heart.svg"></md-icon>-->
+				<!--{{image.likes.count}}-->
+				<!--</span>-->
+				<!--</div>-->
+				<!--</md-list-item>-->
+				<!--</div>-->
+			</md-content>
+		</div>
 
 
-		<div class="noContentCenter">
-			<div ng-if="!users.length">
-				<h1>No users found</h1>
-				<p>
-					Press enter to search;
-				</p>
+		<div class="noSearch" ng-show="!loadFinished">
+			<div class="cssload-container">
+				<div class="cssload-circle-1">
+					<div class="cssload-circle-2">
+						<div class="cssload-circle-3">
+							<div class="cssload-circle-4">
+								<div class="cssload-circle-5">
+									<div class="cssload-circle-6">
+										<div class="cssload-circle-7">
+											<div class="cssload-circle-8">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			<p>Laden... (toffe animatie wel)</p>
 		</div>
 	</div>
-	<div flex="25" flex-sm="10"></div>
+	<div flex="15" flex-sm="5"></div>
 </div>

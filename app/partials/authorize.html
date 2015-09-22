@@ -35,9 +35,12 @@
 					</md-button>
 				</a>
 			</div>
-			<span flex="10" ></span>
+			<span flex="10"></span>
+
 			<div layout="column" flex="45">
-				<md-button class="md-raised md-primary">View profile</md-button>
+				<a ng-href="/profile/{{state.user.username}}">
+					<md-button class="md-raised md-primary">View profile</md-button>
+				</a>
 			</div>
 		</div>
 	</div>

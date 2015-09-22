@@ -1,6 +1,6 @@
-<md-toolbar ng-controller="FooterCtrl" style="position:fixed;">
+<md-toolbar ng-controller="FooterCtrl" style="position:fixed; top:0;">
 	<div class="md-toolbar-tools">
-		<a href="/"><h2>{{title}}</h2></a>
+		<a href="/" hide-sm><h2>{{title}}</h2></a>
 				<span ng-if="state.user">
 					<a ng-href="/feed">
 						<md-button class="md-icon-button">
@@ -9,14 +9,16 @@
 							</md-icon>
 						</md-button>
 					</a>
+
+					<a ng-href="/search">
+						<md-button class="md-icon-button">
+							<md-icon md-svg-icon="img/account-search.svg">
+								<md-tooltip>Search users</md-tooltip>
+							</md-icon>
+						</md-button>
+					</a>
+
 				</span>
-		<a ng-href="/search">
-			<md-button class="md-icon-button">
-				<md-icon md-svg-icon="img/account-search.svg">
-					<md-tooltip>Search users</md-tooltip>
-				</md-icon>
-			</md-button>
-		</a>
 
 		<span flex></span>
 		<md-fab-speed-dial hide-sm md-open="false" md-direction="left" class="md-fling">
@@ -25,7 +27,9 @@
 					<!--<md-tooltip>-->
 					<!--Share-->
 					<!--</md-tooltip>-->
-					<md-icon md-svg-icon="img/share_white.svg"></md-icon>
+					<md-icon md-svg-icon="img/share_white.svg">
+						<md-tooltip>Share this</md-tooltip>
+					</md-icon>
 				</md-button>
 			</md-fab-trigger>
 			<md-fab-actions>
@@ -42,7 +46,9 @@
 			<!--<md-tooltip>-->
 			<!--What is this?-->
 			<!--</md-tooltip>-->
-			<md-icon md-svg-icon="img/help_white.svg" class="s24"></md-icon>
+			<md-icon md-svg-icon="img/help_white.svg" class="s24">
+				<md-tooltip>What is this?</md-tooltip>
+			</md-icon>
 		</md-button>
 
 
@@ -57,26 +63,38 @@
 			<md-button class="md-icon-button"
 					   hide-gt-sm
 					   ng-click="signIn()">
-				<md-icon md-svg-icon="img/login.svg"></md-icon>
+				<md-icon md-svg-icon="img/login.svg">
+					<md-tooltip>
+						Sign in to Instagram
+					</md-tooltip>
+				</md-icon>
 			</md-button>
 		</div>
 
+		<a ng-href="/profile/{{state.user.username}}">
 
-		<md-button
-				hide-sm
-				ng-if="state.user">{{state.user.username}}
-		</md-button>
+			<md-button
+					hide-sm
+					ng-if="state.user">{{state.user.username}}
+			</md-button>
 
-		<md-button class="md-icon-button"
-				   hide-gt-sm
-				   ng-if="state.user">
-			<md-icon md-svg-icon="img/account-circle.svg"></md-icon>
-		</md-button>
+			<md-button class="md-icon-button"
+					   hide-gt-sm
+					   ng-if="state.user">
+				<md-icon md-svg-icon="img/account-circle.svg">
+					<md-tooltip>View profile</md-tooltip>
+				</md-icon>
+			</md-button>
+		</a>
 
 		<md-button class="md-icon-button"
 				   ng-click="signout()"
 				   ng-if="state.user">
-			<md-icon md-svg-icon="img/logout.svg"></md-icon>
+			<md-icon md-svg-icon="img/logout.svg">
+				<md-tooltip>
+					Sign out
+				</md-tooltip>
+			</md-icon>
 		</md-button>
 
 

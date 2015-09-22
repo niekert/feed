@@ -94,6 +94,14 @@ html {
     margin-top: -150px;
 }
 
+.feedImage {
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom:5px;
+    background-color: #f6f6f6;
+    margin-bottom: 5px;
+}
+
 .images {
     margin-top:10px;
     overflow:auto;
@@ -144,11 +152,10 @@ html {
 .boxContent {
     background-color:#fff;
     position: relative;
-    min-height:300px;
-    max-height:500px;
-    overflow:hidden;
+    overflow:auto;
     border-radius: 10px;
     margin-top:10px;
+    min-height: 550px;
     padding-top:5px;
 }
 
